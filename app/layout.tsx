@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HandMan Game",
-  description: "HandMan Game with typescript",
+  title: "HangMan Game",
+  description: "HangMan Game with typescript",
 };
 
 export default function RootLayout({

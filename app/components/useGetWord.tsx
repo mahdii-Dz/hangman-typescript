@@ -2,16 +2,17 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-type wordResponse = {
-  word: string[];
+type wordType = {
+  word: string
+  length: number
+  category: string
+  language: 'en' | string
 };
 
+type wordResponse = [wordType]
+
 async function fetchWord(): Promise<wordResponse> {
-  const res = await fetch("https://api.api-ninjas.com/v1/randomword", {
-    headers: {
-      "X-Api-Key": process.env.NEXT_PUBLIC_Random_Word_APi || "",
-    },
-  });
+  const res = await fetch("https://random-words-api.kushcreates.com/api?language=en&length=5&type=uppercase&words=1");
   if (!res.ok) {
     throw new Error("Failed to fetch word");
   }

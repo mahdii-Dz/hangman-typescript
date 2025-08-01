@@ -35,7 +35,7 @@ function Word() {
   console.log(word);
 
   return (
-    <div className="flex flex-col gap-2 mt-12">
+    <div className="flex flex-col gap-2 mt-8">
       {/* <div className="flex gap-6">
       {WordLetter.map((letter, index) => (
         <h3 key={index} className="text-6xl font-bold">

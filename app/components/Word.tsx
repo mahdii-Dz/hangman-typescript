@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/Context";
 import useGetWord from "./useGetWord";
 
 function Word() {
-  const { word, setWord, setIsTwoSameLetter, setSameLetter, isTwoSameLetter } =
+  const { word, setWord, setIsTwoSameLetter, setSameLetter, correctLetters , gameEnd } =
     useContext(GlobalContext)!;
 
   const { data: fetchedWord } = useGetWord();
@@ -22,9 +22,9 @@ function Word() {
   }, [setWord, fetchedWord]);
 
   useEffect(() => {
-    const doubledLetter = word.find((letter, index) => 
+    const doubledLetter = word.find((letter, index) =>
       word.slice(index + 1).includes(letter)
-    )
+    );
     setIsTwoSameLetter(!!doubledLetter);
     setSameLetter(doubledLetter || "");
   }, [word, setSameLetter, setIsTwoSameLetter]);
@@ -34,12 +34,23 @@ function Word() {
     : word;
   console.log(word);
 
-
   return (
-    <div className="flex gap-2 mt-12">
-      {WordLetter.map((Letters, index) => (
-        <div key={index} className="w-12 h-1 bg-black"></div>
+    <div className="flex flex-col gap-2 mt-12">
+      {/* <div className="flex gap-6">
+      {WordLetter.map((letter, index) => (
+        <h3 key={index} className="text-6xl font-bold">
+          {letter}
+        </h3>
       ))}
+      </div> */} 
+      <div className="flex gap-3 justify-center">
+      {WordLetter.map((letter, index) => (
+        <div key={index} className="text-center">
+          <h3 className={`text-6xl font-bold invisible ${correctLetters.includes(letter) ? 'visible' : ''} ${gameEnd && !correctLetters.includes(letter) ? 'text-red-500 visible' : ''}`}>{letter}</h3>
+          <div className="w-14 h-1 bg-black"></div>
+        </div>
+      ))}
+      </div>
     </div>
   );
 }

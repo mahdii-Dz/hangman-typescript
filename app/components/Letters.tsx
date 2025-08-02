@@ -37,24 +37,17 @@ function Letters() {
     SameLetter,
     correctLetters,
     setCorrectLetters,
+    gameEnd,
     setGameEnd,
     setGameState,
+    showHangMan,
+    setShowHangMan,
   } = useContext(GlobalContext)!;
   const [sameLetterInput, setSameLetterInput] = useState(0);
   const [clickedLetter, setClickedLetter] = useState<string[]>([]);
+  
   function handleLetterClick(e: React.MouseEvent, letter: string) {
-    if (
-      clickedLetter.length === 8 ||
-      (clickedLetter.includes(letter) && !isTwoSameLetter)
-    ) {
-      setGameEnd(true);
-      if (correctLetters.length === word.length) {
-        setGameState("win");
-      } else {
-        setGameState("lose");
-      }
-      return;
-    }
+    if (gameEnd) return;
     if (letter == SameLetter) setSameLetterInput(sameLetterInput + 1);
     if (sameLetterInput >= 2 && letter == SameLetter) return;
 
@@ -73,9 +66,21 @@ function Letters() {
       e.currentTarget.classList.remove("hover:bg-blue-400");
       e.currentTarget.classList.remove("hover:text-white");
     }
+    if(!word.includes(letter) && showHangMan < 6) setShowHangMan(showHangMan + 1)
+    checkWin()
+  }
+  function checkWin() {
+    if (showHangMan >= 6) {
+      setGameEnd(true);
+      setGameState("lose");
+    }
+    if (correctLetters.length == 4 && showHangMan !== 6) {
+      setGameEnd(true);
+      setGameState("win");
+    }
   }
 
-  console.log(clickedLetter, correctLetters);
+  console.log(showHangMan , correctLetters);
 
   return (
     <section className="sm:w-140 w-full px-8 h-auto flex flex-wrap gap-2 ">

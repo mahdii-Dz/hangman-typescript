@@ -14,6 +14,8 @@ type GlobalContextType = {
   setGameEnd: React.Dispatch<React.SetStateAction<boolean>>;
   gameState: gameStateType | string;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>
+  showHangMan:number;
+  setShowHangMan:React.Dispatch<React.SetStateAction<number>>
 };
 
 type gameStateType = 'win' | 'lose' | string
@@ -27,8 +29,9 @@ function Context({ children }: { children: ReactNode }) {
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [gameEnd, setGameEnd] = useState(false);
   const [gameState,setGameState] = useState<gameStateType | string>('')
+  const [showHangMan, setShowHangMan] = useState(0);
 
-  console.log(SameLetter, isTwoSameLetter);
+  console.log("gameState:", gameState);
 
   return (
     <GlobalContext.Provider
@@ -44,7 +47,9 @@ function Context({ children }: { children: ReactNode }) {
         gameEnd,
         setGameEnd,
         gameState,
-        setGameState
+        setGameState,
+        showHangMan,
+        setShowHangMan,
       }}
     >
       {children}

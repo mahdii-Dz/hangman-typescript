@@ -35,14 +35,7 @@ function Word() {
   console.log(word);
 
   return (
-    <div className="flex flex-col gap-2 mt-8">
-      {/* <div className="flex gap-6">
-      {WordLetter.map((letter, index) => (
-        <h3 key={index} className="text-6xl font-bold">
-          {letter}
-        </h3>
-      ))}
-      </div> */} 
+    <div className="flex flex-col gap-2 ">
       <div className="flex gap-3 justify-center">
       {WordLetter.map((letter, index) => (
         <div key={index} className="text-center">

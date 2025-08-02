@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/Context";
 
 function Letters() {
@@ -67,20 +67,18 @@ function Letters() {
       e.currentTarget.classList.remove("hover:text-white");
     }
     if(!word.includes(letter) && showHangMan < 6) setShowHangMan(showHangMan + 1)
-    checkWin()
   }
-  function checkWin() {
+
+  useEffect(()=>{
     if (showHangMan >= 6) {
       setGameEnd(true);
       setGameState("lose");
-    }
-    if (correctLetters.length == 4 && showHangMan !== 6) {
+    }else if (correctLetters.length === 5 ) {
       setGameEnd(true);
       setGameState("win");
     }
-  }
+  },[showHangMan,correctLetters,setGameState,setGameEnd])
 
-  console.log(showHangMan , correctLetters);
 
   return (
     <section className="sm:w-140 w-full px-8 h-auto flex flex-wrap gap-2 ">

@@ -31,7 +31,6 @@ function Context({ children }: { children: ReactNode }) {
   const [gameState,setGameState] = useState<gameStateType | string>('')
   const [showHangMan, setShowHangMan] = useState(0);
 
-  console.log("gameState:", gameState);
 
   return (
     <GlobalContext.Provider

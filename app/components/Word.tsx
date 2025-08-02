@@ -32,7 +32,6 @@ function Word() {
   const WordLetter = fetchedWord
     ? Array.from(fetchedWord[0].word.split(""))
     : word;
-  console.log(word);
 
   return (
     <div className="flex flex-col gap-2 ">
